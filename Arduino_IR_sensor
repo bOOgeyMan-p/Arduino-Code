@@ -1,0 +1,35 @@
+const int sensorPin = 2;
+const int greenLed = 8;
+const int redLed = 9;
+
+int sensorValue;
+
+void setup() {
+  pinMode(sensorPin, INPUT);
+  pinMode(greenLed, OUTPUT);
+  pinMode(redLed, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  sensorValue = digitalRead(sensorPin);
+
+  Serial.print("Sensor Value: ");
+  Serial.println(sensorValue);
+
+  if (sensorValue == HIGH) {
+    // Object is far
+    digitalWrite(greenLed, HIGH);
+    digitalWrite(redLed, LOW);
+    Serial.println("Object is FAR ");
+  }
+  else {
+    // Object is near
+    digitalWrite(greenLed, LOW);
+    digitalWrite(redLed, HIGH);
+    Serial.println("Object is NEAR ");
+  }
+
+  delay(500);
+}
